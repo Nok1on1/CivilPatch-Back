@@ -3,11 +3,14 @@ export
 
 MIGRATIONS_DIR := $(shell pwd)/migrations
 
-.PHONY: init-swagger run-main init-services migrate-database init run dev help
+.PHONY: init-swagger run-main init-services migrate-database init run dev help run-wire
 
 init-swagger:
 	swag init -d "./internal/router,./internal/controller,./internal/model,./internal/dto" -g "router.go" -o ./docs
 
+run-wire:
+	wire ./internal/di/wire.go
+	
 run-main:
 	go run ./cmd/api/main.go
 
