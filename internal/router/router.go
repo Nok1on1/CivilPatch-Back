@@ -3,6 +3,7 @@ package router
 import (
 	_ "backendTemp/docs"
 	"backendTemp/internal/controller"
+	"backendTemp/internal/middleware"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,7 @@ func SetupRouter(c *Controllers) *gin.Engine {
 
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.Use(middleware.CORS())
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
